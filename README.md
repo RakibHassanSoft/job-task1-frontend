@@ -20,17 +20,17 @@ It provides a **clean, responsive, and professional UI** for users to manage the
 ## Installation
 1. Clone the repository
 ```bash
-git clone <your-frontend-repo-url>
+git clone https://github.com/RakibHassanSoft/job-task1-frontend.git
 ```
 2. Navigate to the project directory
 ```bash
-cd frontend-directory
+cd cd job-task1-frontend
 ```
 3. Install dependencies
 ```bash
 npm install
 ```
-4. Create a `.env` file in the root directory and set your API URL
+4. Create a `.env` file in the root directory and set your API URL(Optional because I used in api.ts for testing)
 ```env
 VITE_API_URL=https://job-task1-backend.onrender.com/api/v1
 ```
@@ -39,7 +39,7 @@ VITE_API_URL=https://job-task1-backend.onrender.com/api/v1
 npm run dev
 ```
 ## Usage
-1. Open the app in the browser (default: http://localhost:5173)  
+1. Open the app in the browser (default: http://localhost:5173 or https://job-task1-backend.onrender.com/)  
 2. Register a new user or login:  
    - Email: `user@gmail.com`  
    - Password: `user@123`  
@@ -59,13 +59,4 @@ src/
 ├─ App.tsx            # Main app component
 └─ main.tsx           # React entry point
 ```
-## Contributing
-Contributions are welcome!  
-1. Fork the repository  
-2. Create a branch (`git checkout -b feature/YourFeature`)  
-3. Make your changes and commit (`git commit -m 'Add feature'`)  
-4. Push to branch (`git push origin feature/YourFeature`)  
-5. Open a Pull Request  
-## License
-This project is licensed under the MIT License.
-*/
+
