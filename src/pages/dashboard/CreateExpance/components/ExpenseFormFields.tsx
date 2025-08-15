@@ -1,17 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaUtensils, FaCarSide, FaShoppingCart, FaEllipsisH, FaCalendarAlt, FaMoneyBillWave } from "react-icons/fa";
+import type { ExpenseFormFieldsProps } from "../createExpanceInterface";
+import { useCurrentData } from "../../../../hook/useCurrentData";
 
-interface ExpenseFormFieldsProps {
-  form: {
-    title: string;
-    amount: number;
-    category: "Food" | "Transport" | "Shopping" | "Others";
-    date: string;
-  };
-  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
-}
 
-const ExpenseFormFields: React.FC<ExpenseFormFieldsProps> = ({ form, handleChange }) => {
+
+const ExpenseFormFields: React.FC<ExpenseFormFieldsProps> = ({count, form, handleChange }) => {
+
+  const { data, isLoading, isError ,refetch} = useCurrentData();
+
   const getCategoryIcon = (category: ExpenseFormFieldsProps["form"]["category"]) => {
     switch (category) {
       case "Food": return <FaUtensils className="text-yellow-500" />;
@@ -24,6 +21,7 @@ const ExpenseFormFields: React.FC<ExpenseFormFieldsProps> = ({ form, handleChang
 
   // Calendar state
   const [calendarOpen, setCalendarOpen] = useState(false);
+ 
   const [selectedDate, setSelectedDate] = useState(form.date ? new Date(form.date) : null);
   const [currentMonth, setCurrentMonth] = useState(selectedDate ? new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1) : new Date());
   const calendarRef = useRef<HTMLDivElement>(null);
@@ -55,18 +53,25 @@ const ExpenseFormFields: React.FC<ExpenseFormFieldsProps> = ({ form, handleChang
   return (
     <div className="bg-white p-6 rounded-xl shadow-lg space-y-6">
       {/* Top Section with Money Icon */}
-      <div className="flex lg:h-96 justify-center items-center gap-3 bg-green-50 p-4 rounded-lg shadow-sm">
+      <div className="flex flex-col lg:h-96 justify-center items-center gap-3 bg-green-50 p-4 rounded-lg shadow-sm">
         <FaMoneyBillWave className="text-green-500 text-3xl" />
+          {
+        data &&  <div>
+          <h3 className="text-lg font-semibold text-gray-700">Total data</h3>
+          <p className="text-gray-500 font-bold text-center text-xl">{data?.data?.length + count}</p>
+        </div>
+       }
         <div>
           <h3 className="text-lg font-semibold text-gray-700">Add New Expense</h3>
           <p className="text-gray-500 text-sm">Fill in the details below</p>
         </div>
+     
       </div>
 
       {/* Form Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {/* Title */}
-        <div className="flex flex-col relative">
+        <div className="flex flex-col  relative">
           <label className="text-gray-600 font-medium mb-2">Title</label>
           <input
             type="text"
@@ -77,7 +82,7 @@ const ExpenseFormFields: React.FC<ExpenseFormFieldsProps> = ({ form, handleChang
             required
             className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 shadow-sm transition duration-200"
           />
-          <FaEllipsisH className="absolute left-3 top-10 text-gray-400 pointer-events-none" />
+          <FaEllipsisH className="absolute left-3 top-12 text-gray-400 pointer-events-none" />
         </div>
 
         {/* Amount */}
@@ -86,7 +91,7 @@ const ExpenseFormFields: React.FC<ExpenseFormFieldsProps> = ({ form, handleChang
           <input
             type="number"
             name="amount"
-            value={form.amount}
+            // value={form.amount}
             onChange={handleChange}
             placeholder="Enter amount"
             min={0.01}
@@ -94,7 +99,7 @@ const ExpenseFormFields: React.FC<ExpenseFormFieldsProps> = ({ form, handleChang
             required
             className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 shadow-sm transition duration-200"
           />
-          <span className="absolute left-3 top-10 text-gray-400">$</span>
+          <span className="absolute left-3 top-11 text-gray-400">$</span>
         </div>
 
         {/* Category */}
@@ -111,7 +116,7 @@ const ExpenseFormFields: React.FC<ExpenseFormFieldsProps> = ({ form, handleChang
             <option value="Shopping">Shopping</option>
             <option value="Others">Others</option>
           </select>
-          <div className="absolute left-3 top-10">{getCategoryIcon(form.category)}</div>
+          <div className="absolute left-3 top-12">{getCategoryIcon(form.category)}</div>
         </div>
 
         {/* Date */}
@@ -125,7 +130,7 @@ const ExpenseFormFields: React.FC<ExpenseFormFieldsProps> = ({ form, handleChang
             onClick={() => setCalendarOpen(!calendarOpen)}
             className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 shadow-sm cursor-pointer transition duration-200"
           />
-          <FaCalendarAlt className="absolute left-3 top-10 text-gray-400" />
+          <FaCalendarAlt className="absolute left-3 top-12 text-gray-400" />
 
           {calendarOpen && (
             <div className="absolute top-full mt-2 border rounded-lg bg-white shadow-lg z-50 p-3 w-full">

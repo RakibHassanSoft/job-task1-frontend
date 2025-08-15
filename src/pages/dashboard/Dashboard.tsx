@@ -10,9 +10,7 @@ const routes = [
   { name: "Dashboard", path: "/dashboard", end: true },
   { name: "Create Expense", path: "create-expense", end: true },
   { name: "Operation", path: "operation", end: true },
-  { name: "Sellers", path: "sellers", end: true },
-  { name: "Transactions", path: "/dashboard/transactions", end: true },
-  { name: "Account", path: "/dashboard/account", end: true },
+ 
 ];
 
 const DashboardLayout: React.FC = () => {
@@ -47,7 +45,7 @@ const DashboardLayout: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex bg-gray-100 text-gray-700">
+    <div className="  min-h-screen flex bg-gray-100 text-gray-700">
       {/* Mobile Sidebar */}
       <div
         className={`fixed inset-0 mt-16 z-40 bg-white w-64 border-r border-gray-200 transform transition-transform lg:hidden ${

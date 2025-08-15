@@ -43,6 +43,7 @@ const RegisterPage: React.FC = () => {
         email: form.email,
         password: form.password,
       });
+      console.log(data)
       
       setSuccess("Registration successful!");
       setForm({ name: "", email: "", password: "", confirmPassword: "" });

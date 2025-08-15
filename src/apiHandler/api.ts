@@ -2,7 +2,8 @@ import axios from "axios";
 import type { AxiosRequestConfig } from "axios";
 
 // Base URL for your API
-const BASE_URL = "http://localhost:3000/api/v1";
+// const BASE_URL = "http://localhost:3000/api/v1";
+const BASE_URL = "https://job-task1-backend.onrender.com/api/v1";
 
 // --- Public Axios instance ---
 export const publicAxios = axios.create({

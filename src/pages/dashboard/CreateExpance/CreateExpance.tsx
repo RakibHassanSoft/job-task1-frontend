@@ -4,26 +4,11 @@ import { fetchPrivate } from "../../../apiHandler/api";
 
 import ExpenseFormFields from "./components/ExpenseFormFields";
 import DashboardInfo from "./components/DashboardInfo";
+import type { CreateExpenseResponse, ExpenseForm } from "./createExpanceInterface";
 
-interface ExpenseForm {
-  title: string;
-  amount: number;
-  category: "Food" | "Transport" | "Shopping" | "Others";
-  date: string;
-}
 
-interface CreateExpenseResponse {
-  _id: string;
-  title: string;
-  amount: number;
-  category: string;
-  date: string;
-  user: string;
-  createdAt: string;
-  updatedAt: string;
-}
 
-const CreateExpance: React.FC = () => {
+const CreateExpance = () => {
   const [form, setForm] = useState<ExpenseForm>({
     title: "",
     amount: 0,
@@ -32,7 +17,7 @@ const CreateExpance: React.FC = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [refreshTrigger, setRefreshTrigger] = useState(0);
+   const [count , setCount] = useState(0);
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -51,6 +36,9 @@ const CreateExpance: React.FC = () => {
         "expense/create",
         { method: "POST", data: form }
       );
+      if(response){
+        await setCount(1)
+      }
 
       if (response) {
         Swal.fire({
@@ -61,8 +49,7 @@ const CreateExpance: React.FC = () => {
           timer: 1500,
         });
 
-        // Trigger dashboard refresh
-        setRefreshTrigger((prev) => prev + 1);
+    
       }
 
       setForm({ title: "", amount: 0, category: "Food", date: "" });
@@ -85,9 +72,10 @@ const CreateExpance: React.FC = () => {
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Use ExpenseFormFields component */}
-          <ExpenseFormFields form={form} handleChange={handleChange} />
+          <ExpenseFormFields count={count} onClick={()=>setCount(1)} form={form} handleChange={handleChange} />
 
           <button
+           
             type="submit"
             className="w-full bg-green-500 text-white py-3 rounded-xl font-semibold text-lg hover:bg-green-600 transition-shadow shadow-md hover:shadow-xl"
             disabled={loading}
@@ -98,7 +86,7 @@ const CreateExpance: React.FC = () => {
       </div>
 
       {/* Dashboard */}
-      <DashboardInfo refreshTrigger={refreshTrigger} />
+      <DashboardInfo  count={count}/>
     </div>
   );
 };
