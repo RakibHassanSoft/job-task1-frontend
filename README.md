@@ -38,6 +38,10 @@ VITE_API_URL=https://job-task1-backend.onrender.com/api/v1
 ```bash
 npm run dev
 ```
+6. live url
+```bash
+https://jocular-fenglisu-bf33a6.netlify.app/
+```
 ## Usage
 1. Open the app in the browser (default: http://localhost:5173 or https://job-task1-backend.onrender.com/)  
 2. Register a new user or login:  
