@@ -8,7 +8,7 @@ const App = () => {
     <div className="min-h-screen flex flex-col bg-gray-50">
       {/* Navbar */}
       {!hideNavbar && (
-        <nav className="bg-white shadow-md px-6 py-4 flex justify-between items-center">
+        <nav className= "bg-white   w-7xl m-auto shadow-md px-6 py-4 flex justify-between items-center">
           <div className="text-2xl font-bold text-emerald-600">NestMart</div>
           <div className="space-x-4">
             <Link
@@ -28,7 +28,7 @@ const App = () => {
       )}
 
       {/* Page Content */}
-      <main className="flex-1 flex items-center justify-center p-4">
+      <main className="flex-1  flex items-center justify-center p-4">
         <Outlet />
       </main>
     </div>

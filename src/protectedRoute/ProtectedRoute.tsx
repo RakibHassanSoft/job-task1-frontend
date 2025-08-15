@@ -1,7 +1,7 @@
 // ProtectedRoute.tsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCurrentUser } from "./auth";
+import { getCurrentUser } from "../apiHandler/getCurrentUser";
 
 interface ProtectedRouteProps {
   children: React.ReactElement<any>;

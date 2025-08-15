@@ -6,11 +6,23 @@ import Login from "./pages/login/Login";
 import "./index.css";
 import RegisterPage from "./pages/register/Register";
 import Dashboard from "./pages/dashboard/Dashboard";
+import ProtectedRoute from "./protectedRoute/ProtectedRoute";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import Home from "./pages/Home/Home";
+import DashboardHome from "./pages/dashboard/DashboardHome/dashboardHome";
+import CreateExpance from "./pages/dashboard/CreateExpance/CreateExpance";
+import DashboardOperation from "./pages/dashboard/Dashboardoperation/DashboardOperation";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <NotFoundPage />,
     children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
       {
         path: "/login",
         element: <Login />,
@@ -21,15 +33,42 @@ const router = createBrowserRouter([
       },
     ],
   },
+
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "",
+        element: <DashboardHome />,
+      },
+      {
+        path: "create-expance",
+        element: <CreateExpance />,
+      },
+      {
+        path: "pp",
+        element: <DashboardOperation />,
+      },
+    ],
   },
 ]);
 
-const root = document.getElementById("root");
-if (!root) {
-  throw new Error("Root element not found");
-}
 
-ReactDOM.createRoot(root).render(<RouterProvider router={router} />);
+const queryClient = new QueryClient(); // <-- create instance
+
+const root = document.getElementById("root");
+if (!root) throw new Error("Root element not found");
+
+ReactDOM.createRoot(root).render(
+ 
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+
+);
+
