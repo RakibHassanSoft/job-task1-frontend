@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllExpenses } from "../utils/getallData";
+import { getAllExpenses } from "../../../../utils/getallData";
 
 interface Expense {
   _id: string;
@@ -21,7 +21,9 @@ const DashboardInfo = ({ refreshTrigger }: { refreshTrigger: number }) => {
         const items = await getAllExpenses(); // returns Expense[]
         setExpenses(items);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to fetch expenses");
+        setError(
+          err instanceof Error ? err.message : "Failed to fetch expenses"
+        );
       } finally {
         setLoading(false);
       }

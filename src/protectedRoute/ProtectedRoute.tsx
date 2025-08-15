@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../apiHandler/getCurrentUser";
+import { useLogout } from "../hook/useLogout";
 
 interface ProtectedRouteProps {
   children: React.ReactElement<any>;
@@ -11,12 +12,13 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
   const navigate = useNavigate();
-
+   const logout = useLogout();
   useEffect(() => {
     const checkUser = async () => {
       const currentUser = await getCurrentUser();
       if (!currentUser) {
         navigate("/login");
+        logout();
       } else {
         setUser(currentUser.user);
       }

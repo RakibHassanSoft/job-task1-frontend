@@ -47,11 +47,11 @@ const router = createBrowserRouter([
         element: <DashboardHome />,
       },
       {
-        path: "create-expance",
+        path: "create-expense",
         element: <CreateExpance />,
       },
       {
-        path: "pp",
+        path: "operation",
         element: <DashboardOperation />,
       },
     ],
