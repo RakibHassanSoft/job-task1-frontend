@@ -24,7 +24,7 @@ git clone https://github.com/RakibHassanSoft/job-task1-frontend.git
 ```
 2. Navigate to the project directory
 ```bash
-cd cd job-task1-frontend
+cd job-task1-frontend
 ```
 3. Install dependencies
 ```bash
