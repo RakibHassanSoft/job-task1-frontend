@@ -6,6 +6,7 @@ import ExpenseTable from "./components/ExpenseTable";
 import DeleteConfirmation from "./components/DeleteConformation";
 import EditExpenseModal from "./components/EditExpenseModal";
 import type { Expense } from "./DashboardoperationInterface";
+import DashboardSkeleton from "../DashboardHome/components/DashboardSkeleton";
 
 
 
@@ -24,11 +25,11 @@ const DashboardOperation: React.FC = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  if (isLoading) return <p className="text-gray-500">Loading expenses...</p>;
+  if (isLoading) return <DashboardSkeleton/>;
   if (isError || !expanceData?.data)
     return <p className="text-red-500">Failed to load expenses.</p>;
 
-  const expenses: Expense[] = expanceData.data;
+  const expenses: Expense[] = expanceData?.data;
 
   // Filter logic
   const filteredExpenses = expenses.filter((exp) => {

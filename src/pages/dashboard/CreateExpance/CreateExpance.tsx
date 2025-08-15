@@ -79,7 +79,7 @@ const CreateExpance: React.FC = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="bg-white rounded-2xl shadow-xl p-6 border border-gray-200 flex flex-col justify-between hover:shadow-2xl transition">
+      <div className="bg-white  rounded-2xl shadow-xl p-6 border border-gray-200 flex flex-col justify-between hover:shadow-2xl transition">
         <h2 className="text-2xl font-bold text-gray-700 mb-6 border-b pb-2">
           Create New Expense
         </h2>

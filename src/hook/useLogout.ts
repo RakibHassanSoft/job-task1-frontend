@@ -1,16 +1,20 @@
 // useLogout.ts
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
+import { privateAxios } from "../apiHandler/api"; // import the Axios instance
 
 export const useLogout = () => {
   const navigate = useNavigate();
 
-  const logout = () => {
-    // Remove token cookie
-    Cookies.remove("token");
+  const logout = async () => {
+    try {
+      // Call backend logout route
+      await privateAxios.post("/auth/logout", {}, { withCredentials: true });
 
-    // Redirect to login
-    navigate("/login");
+      // Redirect to login
+      navigate("/login");
+    } catch (err) {
+      console.error("Logout failed:", err);
+    }
   };
 
   return logout;

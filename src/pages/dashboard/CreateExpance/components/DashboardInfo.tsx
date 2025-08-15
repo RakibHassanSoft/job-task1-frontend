@@ -48,46 +48,49 @@ const DashboardInfo = ({ refreshTrigger }: { refreshTrigger: number }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-6 border border-gray-200 max-h-[600px] overflow-y-auto hover:shadow-2xl transition">
-      <h3 className="text-xl font-semibold text-gray-600 mb-4 text-center">
-        Dashboard Info
-      </h3>
-      <h3 className="text-xl font-semibold text-gray-600 mb-4 text-center">
-        Dashboard {expenses.length}
-      </h3>
+   <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-6
+                h-auto lg:h-[calc(100vh-2rem)] max-h-[calc(100vh-2rem)]
+                overflow-y-auto hover:shadow-2xl transition">
+  <h3 className="text-xl font-semibold text-gray-600 mb-4 text-center">
+    Dashboard Info
+  </h3>
+  <h3 className="text-lg font-medium text-gray-500 mb-6 text-center">
+    Total Expenses: {expenses.length}
+  </h3>
 
-      {loading ? (
-        <p className="text-gray-500 text-center">Loading...</p>
-      ) : error ? (
-        <p className="text-red-500 text-center">{error}</p>
-      ) : expenses.length === 0 ? (
-        <p className="text-gray-500 text-center">No expenses found.</p>
-      ) : (
-        <ul className="space-y-4">
-          {expenses.map((expense) => (
-            <li
-              key={expense._id}
-              className="flex justify-between items-center p-4 border rounded-xl hover:shadow-md transition"
-            >
-              <div className="flex items-center gap-3">
-                <div className="bg-gray-100 p-2 rounded-full">
-                  {getCategoryIcon(expense.category)}
-                </div>
-                <div>
-                  <p className="text-gray-900 font-semibold">{expense.title}</p>
-                  <p className="text-gray-500 text-sm">
-                    {new Date(expense.date).toLocaleDateString()}
-                  </p>
-                </div>
-              </div>
-              <div className="text-gray-900 font-bold">
-                ${expense.amount.toFixed(2)}
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+  {loading ? (
+    <p className="text-gray-500 text-center">Loading...</p>
+  ) : error ? (
+    <p className="text-red-500 text-center">{error}</p>
+  ) : expenses.length === 0 ? (
+    <p className="text-gray-500 text-center">No expenses found.</p>
+  ) : (
+    <ul className="space-y-4">
+      {expenses.map((expense) => (
+        <li
+          key={expense._id}
+          className="flex justify-between items-center p-4 border rounded-xl hover:shadow-md transition"
+        >
+          <div className="flex items-center gap-3">
+            <div className="bg-gray-100 p-2 rounded-full text-lg">
+              {getCategoryIcon(expense.category)}
+            </div>
+            <div>
+              <p className="text-gray-900 font-semibold">{expense.title}</p>
+              <p className="text-gray-500 text-sm">
+                {new Date(expense.date).toLocaleDateString()}
+              </p>
+            </div>
+          </div>
+          <div className="text-gray-900 font-bold">
+            ${expense.amount.toFixed(2)}
+          </div>
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
+
   );
 };
 
