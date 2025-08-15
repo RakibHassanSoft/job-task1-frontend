@@ -18,6 +18,7 @@ const CreateExpance = () => {
 
   const [loading, setLoading] = useState(false);
    const [count , setCount] = useState(0);
+   
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -72,7 +73,7 @@ const CreateExpance = () => {
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Use ExpenseFormFields component */}
-          <ExpenseFormFields count={count} onClick={()=>setCount(1)} form={form} handleChange={handleChange} />
+          <ExpenseFormFields  form={form} handleChange={handleChange} />
 
           <button
            

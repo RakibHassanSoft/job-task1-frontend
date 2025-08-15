@@ -9,7 +9,10 @@ import {
   Title,
   Tooltip,
   Legend,
+
 } from "chart.js";
+import type { ChartOptions } from "chart.js";
+
 import type { Expense } from "../DashboardHomeInterface";
 
 ChartJS.register(
@@ -69,7 +72,8 @@ const ExpensesChart: React.FC<Props> = ({ expenses }) => {
     ],
   };
 
-  const options = {
+  // Explicitly type options as ChartOptions<"line">
+  const options: ChartOptions<"line"> = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -82,7 +86,7 @@ const ExpensesChart: React.FC<Props> = ({ expenses }) => {
       },
       tooltip: {
         callbacks: {
-          label: (context: any) => `$${context.parsed.y.toFixed(2)}`,
+          label: (context) => `$${context.parsed.y?.toFixed(2)}`,
         },
       },
     },
@@ -99,54 +103,54 @@ const ExpensesChart: React.FC<Props> = ({ expenses }) => {
   return (
     <div className="w-full flex justify-center px-2 sm:px-4 lg:px-6">
       <div className="w-full max-w-7xl bg-white p-4 sm:p-6 lg:p-8 rounded-xl shadow-lg flex flex-col gap-6">
+        
         {/* Filters */}
         <div className="flex flex-col sm:flex-row sm:items-end gap-4 sm:gap-6 flex-wrap 
                 bg-green-50 p-6 rounded-xl shadow-md">
-  {/* Start Date */}
-  <div className="flex-1 min-w-[140px]">
-    <label className="block text-gray-700 text-sm font-medium mb-2">Start Date</label>
-    <input
-      type="date"
-      className="w-full border border-green-300 rounded-lg p-2 sm:p-3 text-sm sm:text-base
-                 shadow-sm hover:shadow-md transition focus:ring-2 focus:ring-green-400
-                 focus:border-green-400 focus:outline-none bg-white"
-      value={startDate}
-      onChange={(e) => setStartDate(e.target.value)}
-    />
-  </div>
+          {/* Start Date */}
+          <div className="flex-1 min-w-[140px]">
+            <label className="block text-gray-700 text-sm font-medium mb-2">Start Date</label>
+            <input
+              type="date"
+              className="w-full border border-green-300 rounded-lg p-2 sm:p-3 text-sm sm:text-base
+                         shadow-sm hover:shadow-md transition focus:ring-2 focus:ring-green-400
+                         focus:border-green-400 focus:outline-none bg-white"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+          </div>
 
-  {/* End Date */}
-  <div className="flex-1 min-w-[140px]">
-    <label className="block text-gray-700 text-sm font-medium mb-2">End Date</label>
-    <input
-      type="date"
-      className="w-full border border-green-300 rounded-lg p-2 sm:p-3 text-sm sm:text-base
-                 shadow-sm hover:shadow-md transition focus:ring-2 focus:ring-green-400
-                 focus:border-green-400 focus:outline-none bg-white"
-      value={endDate}
-      onChange={(e) => setEndDate(e.target.value)}
-    />
-  </div>
+          {/* End Date */}
+          <div className="flex-1 min-w-[140px]">
+            <label className="block text-gray-700 text-sm font-medium mb-2">End Date</label>
+            <input
+              type="date"
+              className="w-full border border-green-300 rounded-lg p-2 sm:p-3 text-sm sm:text-base
+                         shadow-sm hover:shadow-md transition focus:ring-2 focus:ring-green-400
+                         focus:border-green-400 focus:outline-none bg-white"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+          </div>
 
-  {/* Category Select */}
-  <div className="flex-1 min-w-[140px]">
-    <label className="block text-gray-700 text-sm font-medium mb-2">Category</label>
-    <select
-      className="w-full border border-green-300 rounded-lg p-2 sm:p-3 text-sm sm:text-base
-                 shadow-sm hover:shadow-md transition focus:ring-2 focus:ring-green-400
-                 focus:border-green-400 focus:outline-none bg-white"
-      value={category}
-      onChange={(e) => setCategory(e.target.value)}
-    >
-      <option value="All">All</option>
-      <option value="Food">Food</option>
-      <option value="Transport">Transport</option>
-      <option value="Shopping">Shopping</option>
-      <option value="Others">Others</option>
-    </select>
-  </div>
-</div>
-
+          {/* Category Select */}
+          <div className="flex-1 min-w-[140px]">
+            <label className="block text-gray-700 text-sm font-medium mb-2">Category</label>
+            <select
+              className="w-full border border-green-300 rounded-lg p-2 sm:p-3 text-sm sm:text-base
+                         shadow-sm hover:shadow-md transition focus:ring-2 focus:ring-green-400
+                         focus:border-green-400 focus:outline-none bg-white"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="All">All</option>
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Others">Others</option>
+            </select>
+          </div>
+        </div>
 
         {/* Chart */}
         <div className="w-full min-h-[350px] sm:min-h-[400px] md:min-h-[450px] lg:min-h-[500px]">

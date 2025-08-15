@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useCurrentData } from "../../../hook/useCurrentData";
 import { fetchPrivate } from "../../../apiHandler/api";
 import FilterBar from "./components/FilterBar";
 import ExpenseTable from "./components/ExpenseTable";
@@ -7,13 +6,12 @@ import DeleteConfirmation from "./components/DeleteConformation";
 import EditExpenseModal from "./components/EditExpenseModal";
 import type { Expense } from "./DashboardoperationInterface";
 import DashboardSkeleton from "../DashboardHome/components/DashboardSkeleton";
-
-
+import { useCurrentDataFixed } from "../../../hook/useCurrentFixedData";
 
 const categories = ["Food", "Transport", "Shopping", "Others"];
 
 const DashboardOperation: React.FC = () => {
-  const { data: expanceData, isLoading, isError, refetch } = useCurrentData();
+  const { data, isLoading, isError, refetch } = useCurrentDataFixed(); // new hook
 
   const [editOpen, setEditOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
@@ -25,11 +23,11 @@ const DashboardOperation: React.FC = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  if (isLoading) return <DashboardSkeleton/>;
-  if (isError || !expanceData?.data)
+  if (isLoading) return <DashboardSkeleton />;
+  if (isError || !data?.data)
     return <p className="text-red-500">Failed to load expenses.</p>;
 
-  const expenses: Expense[] = expanceData?.data;
+  const expenses: Expense[] = data.data;
 
   // Filter logic
   const filteredExpenses = expenses.filter((exp) => {

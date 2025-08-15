@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import ExpensesChart from "./components/ExpensesChart";
-import RecentExpensesTable from "./components/RecentExpensesTable";
-import { fetchPrivate } from "../../../apiHandler/api";
 import TopCards from "./TopCards";
+import { fetchPrivate } from "../../../../apiHandler/api";
+import ExpensesChart from "./ExpensesChart";
+import RecentExpensesTable from "./RecentExpensesTable";
+import Swal from "sweetalert2";
 
 // Types
 export interface Expense {
@@ -49,12 +50,19 @@ const DashboardHome: React.FC = () => {
           totalExpenses: data.length,
           totalAmount: data.reduce((acc, e) => acc + e.amount, 0),
           foodExpenses: data.filter((e) => e.category === "Food").length,
-          transportExpenses: data.filter((e) => e.category === "Transport").length,
-          shoppingExpenses: data.filter((e) => e.category === "Shopping").length,
+          transportExpenses: data.filter((e) => e.category === "Transport")
+            .length,
+          shoppingExpenses: data.filter((e) => e.category === "Shopping")
+            .length,
           otherExpenses: data.filter((e) => e.category === "Others").length,
         });
       } catch (err) {
-        console.error("Error fetching expenses:", err);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Network problem",
+        });
+        // console.error("Error fetching expenses:", err);
       } finally {
         setLoading(false);
       }

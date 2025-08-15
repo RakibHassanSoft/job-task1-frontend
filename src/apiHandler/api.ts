@@ -1,5 +1,6 @@
 import axios from "axios";
 import type { AxiosRequestConfig } from "axios";
+import Swal from "sweetalert2";
 
 // Base URL for your API
 // const BASE_URL = "http://localhost:3000/api/v1";
@@ -8,7 +9,7 @@ const BASE_URL = "https://job-task1-backend.onrender.com/api/v1";
 // --- Public Axios instance ---
 export const publicAxios = axios.create({
   baseURL: BASE_URL,
-   withCredentials: true, 
+  withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },
@@ -28,8 +29,13 @@ privateAxios.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      console.error("Unauthorized: please login again");
-      // Optional: redirect to login
+      // console.error("Unauthorized: please login again");
+      Swal.fire({
+        icon: "error",
+        title: "Unauthorized",
+        text: "Please login again",
+        confirmButtonText: "OK",
+      });
     }
     return Promise.reject(error);
   }

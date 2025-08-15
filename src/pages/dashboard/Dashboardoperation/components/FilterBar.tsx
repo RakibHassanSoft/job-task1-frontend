@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import type { FilterBarProps } from "../DashboardoperationInterface";
 import { FaUtensils, FaShoppingCart, FaCarSide, FaEllipsisH, FaSearch, FaCalendarAlt } from "react-icons/fa";
 
-const categoryIcons: Record<string, JSX.Element> = {
+const categoryIcons: Record<string, React.ReactNode> = {
   Food: <FaUtensils className="text-green-500" />,
   Transport: <FaCarSide className="text-blue-500" />,
   Shopping: <FaShoppingCart className="text-yellow-500" />,

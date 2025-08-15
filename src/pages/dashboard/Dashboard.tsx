@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../apiHandler/getCurrentUser";
 import Swal from "sweetalert2";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import {  XMarkIcon } from "@heroicons/react/24/outline";
 import LogoutButton from "../../components/LogoutButton";
 import { useLogout } from "../../hook/useLogout";
 
@@ -21,7 +21,8 @@ const DashboardLayout: React.FC = () => {
   async function fetchCurrentUser() {
     try {
       const user = await getCurrentUser();
-      if (!user?.data?.user) {
+
+      if (!user) {
         logout(); // Call the logout function from useLogout hook
         navigate("/login");
         return;

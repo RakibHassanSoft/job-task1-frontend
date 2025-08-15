@@ -4,10 +4,9 @@ import type { ExpenseFormFieldsProps } from "../createExpanceInterface";
 import { useCurrentData } from "../../../../hook/useCurrentData";
 
 
+const ExpenseFormFields: React.FC<ExpenseFormFieldsProps> = ({form, handleChange }) => {
 
-const ExpenseFormFields: React.FC<ExpenseFormFieldsProps> = ({count, form, handleChange }) => {
-
-  const { data, isLoading, isError ,refetch} = useCurrentData();
+  const {  isLoading, isError ,refetch} = useCurrentData();
 
   const getCategoryIcon = (category: ExpenseFormFieldsProps["form"]["category"]) => {
     switch (category) {
@@ -48,19 +47,17 @@ const ExpenseFormFields: React.FC<ExpenseFormFieldsProps> = ({count, form, handl
     setSelectedDate(day);
     handleChange({ target: { name: "date", value: day.toISOString().split("T")[0] } } as any);
     setCalendarOpen(false);
+    refetch();
   };
-
+   
+  if(isLoading) <h1 className="text-3xl justify-center text-green-600">Loading...</h1>
+  if(isError) <h1 className="text-3xl justify-center text-red-600">Network problem</h1>
   return (
     <div className="bg-white p-6 rounded-xl shadow-lg space-y-6">
       {/* Top Section with Money Icon */}
       <div className="flex flex-col lg:h-96 justify-center items-center gap-3 bg-green-50 p-4 rounded-lg shadow-sm">
         <FaMoneyBillWave className="text-green-500 text-3xl" />
-          {
-        data &&  <div>
-          <h3 className="text-lg font-semibold text-gray-700">Total data</h3>
-          <p className="text-gray-500 font-bold text-center text-xl">{data?.data?.length + count}</p>
-        </div>
-       }
+        
         <div>
           <h3 className="text-lg font-semibold text-gray-700">Add New Expense</h3>
           <p className="text-gray-500 text-sm">Fill in the details below</p>

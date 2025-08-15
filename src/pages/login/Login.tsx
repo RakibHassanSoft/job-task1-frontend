@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import type { FormEvent } from "react";
 import { publicAxios } from "../../apiHandler/api";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 interface LoginForm {
   email: string;
@@ -11,8 +12,6 @@ interface LoginForm {
 export default function Login() {
   const [form, setForm] = useState<LoginForm>({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,25 +21,32 @@ export default function Login() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
-    setSuccess(null);
 
     try {
-      const { data } = await publicAxios.post("/auth/login", {
+      await publicAxios.post("/auth/login", {
         email: form.email,
         password: form.password,
       });
 
-      setSuccess("Login successful!");
-      // redirect to dashboard or private route
-      // window.location.href = "/dashboard";
+      // Success alert
+      await Swal.fire({
+        icon: "success",
+        title: "Login Successful",
+        text: "Redirecting to dashboard...",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+
+      // redirect after alert
       navigate("/dashboard");
+
     } catch (err: any) {
-      if (err.response?.data?.message) {
-        setError(err.response.data.message);
-      } else {
-        setError(err.message || "Login failed");
-      }
+      // Error alert
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: err.response?.data?.message || err.message || "Please try again",
+      });
     } finally {
       setLoading(false);
     }

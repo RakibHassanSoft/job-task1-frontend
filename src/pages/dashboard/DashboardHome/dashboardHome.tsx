@@ -6,6 +6,7 @@ import { fetchPrivate } from "../../../apiHandler/api";
 import TopCards from "./components/TopCards";
 import type { DashboardStats, Expense } from "./DashboardHomeInterface";
 import DashboardSkeleton from "./components/DashboardSkeleton";
+import Swal from "sweetalert2";
 
 const DashboardHome: React.FC = () => {
   const [expenses, setExpenses] = useState<Expense[]>([]);
@@ -33,12 +34,31 @@ const DashboardHome: React.FC = () => {
           totalExpenses: data.length,
           totalAmount: data.reduce((acc, e) => acc + e.amount, 0),
           foodExpenses: data.filter((e) => e.category === "Food").length,
-          transportExpenses: data.filter((e) => e.category === "Transport").length,
-          shoppingExpenses: data.filter((e) => e.category === "Shopping").length,
+          transportExpenses: data.filter((e) => e.category === "Transport")
+            .length,
+          shoppingExpenses: data.filter((e) => e.category === "Shopping")
+            .length,
           otherExpenses: data.filter((e) => e.category === "Others").length,
         });
-      } catch (err) {
-        console.error("Error fetching expenses:", err);
+      } catch (err: any) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: err.response?.data?.message || "Failed to fetch expenses",
+          confirmButtonText: "OK",
+        });
+
+        // Optional: if it's an auth error
+        if (err.response?.status === 401) {
+          Swal.fire({
+            icon: "warning",
+            title: "Unauthorized",
+            text: "Please login again",
+            confirmButtonText: "OK",
+          });
+          // Optional: redirect to login
+          // window.location.href = "/login";
+        }
       } finally {
         setLoading(false);
       }
