@@ -9,7 +9,7 @@ import { useLogout } from "../../hook/useLogout";
 const routes = [
   { name: "Dashboard", path: "/dashboard", end: true },
   { name: "Create Expense", path: "create-expense", end: true },
-  { name: "Operation", path: "operation", end: true },
+   { name: "Manage Expenses", path: "manage-expenses", end: true },
  
 ];
 
