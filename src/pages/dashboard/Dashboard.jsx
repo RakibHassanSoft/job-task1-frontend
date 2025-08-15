@@ -1,7 +1,23 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import { getCurrentUser } from "../../apiHandler/getCurrentUser";
+
 
 const DashboardLayout = () => {
+    async function fetchCurrentUser() {
+        try {
+            const user = await getCurrentUser();
+            console.log("Current User:", user);
+        } catch (error) {
+            console.error("Error fetching current user:", error);
+        }
+    }
+    // Fetch current user when the component mounts
+    React.useEffect(() => {
+        fetchCurrentUser();
+    }, []);
+
+    console.log(getCurrentUser());
   return (
     <div className="min-h-screen flex bg-gray-100 text-gray-700">
       {/* Sidebar */}

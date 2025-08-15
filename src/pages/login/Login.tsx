@@ -1,7 +1,8 @@
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import type { FormEvent } from "react";
 import { publicAxios } from "../../apiHandler/api";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 interface LoginForm {
   email: string;
@@ -26,11 +27,12 @@ export default function Login() {
     setSuccess(null);
 
     try {
-      const { data } = await publicAxios.post("/auth/login", {
+      const {data} = await publicAxios.post("/auth/login", {
         email: form.email,
         password: form.password,
       });
-     console.log(data); 
+      
+      console.log(data);
       console.log("Login response:", data);
 
       setSuccess("Login successful!");
@@ -65,10 +67,14 @@ export default function Login() {
         </h2>
 
         {error && (
-          <div className="text-red-500 text-center mb-4 font-semibold">{error}</div>
+          <div className="text-red-500 text-center mb-4 font-semibold">
+            {error}
+          </div>
         )}
         {success && (
-          <div className="text-green-500 text-center mb-4 font-semibold">{success}</div>
+          <div className="text-green-500 text-center mb-4 font-semibold">
+            {success}
+          </div>
         )}
 
         <form onSubmit={handleSubmit}>
