@@ -4,6 +4,7 @@ import { getCurrentUser } from "../../apiHandler/getCurrentUser";
 
 
 const DashboardLayout = () => {
+    // Function to fetch the current user
     async function fetchCurrentUser() {
         try {
             const user = await getCurrentUser();
