@@ -91,6 +91,10 @@ const DashboardLayout: React.FC = () => {
             </NavLink>
           ))}
         </nav>
+         <div className="border-t border-gray-200 my-4"></div>
+        <div className="px-4 py-2">
+          <LogoutButton className="w-full justify-start" />
+        </div>
       </div>
 
       {/* Desktop Sidebar */}
