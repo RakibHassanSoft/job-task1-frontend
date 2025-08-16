@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import { fetchPrivate } from "../apiHandler/api";
 
 interface Expense {
@@ -16,7 +17,11 @@ export async function getAllExpenses(): Promise<Expense[]> {
     // Extract the actual array
     return response.data;
   } catch (error) {
-    console.error("Error fetching expenses:", error);
+     Swal.fire({
+    icon: "error",
+    title: "Error",
+    text:  "Failed to fetch expenses",
+  });
     return [];
   }
 }

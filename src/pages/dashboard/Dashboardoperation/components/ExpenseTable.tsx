@@ -10,7 +10,7 @@ import type { ExpenseTableProps } from "../DashboardoperationInterface";
 
 const categoryStyles: Record<
   string,
-  { bg: string; text: string; icon: JSX.Element }
+  { bg: string; text: string; icon:  React.ReactNode }
 > = {
   Food: { bg: "bg-green-100", text: "text-green-800", icon: <FaUtensils /> },
   Transport: { bg: "bg-blue-100", text: "text-blue-800", icon: <FaCarSide /> },

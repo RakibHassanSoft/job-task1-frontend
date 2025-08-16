@@ -44,7 +44,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <DashboardHome />,
+        element:  <ProtectedRoute>
+       <DashboardHome />
+      </ProtectedRoute>,
+        
+
       },
       {
         path: "create-expense",

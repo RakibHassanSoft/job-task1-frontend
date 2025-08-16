@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import type { FormEvent } from "react";
 import { publicAxios } from "../../apiHandler/api";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 interface RegisterForm {
   name: string;
@@ -24,47 +25,74 @@ const RegisterPage: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  setLoading(true);
+  setError(null);
+  setSuccess(null);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    setSuccess(null);
+  // Check password match
+  if (form.password !== form.confirmPassword) {
+    setError("Passwords do not match");
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Passwords do not match",
+    });
+    setLoading(false);
+    return;
+  }
 
-    if (form.password !== form.confirmPassword) {
-      setError("Passwords do not match");
-      setLoading(false);
-      return;
-    }
+  try {
+    const { data } = await publicAxios.post("/auth/register", {
+      name: form.name,
+      email: form.email,
+      password: form.password,
+    });
 
-    try {
-      const { data } = await publicAxios.post("/auth/register", {
-        name: form.name,
-        email: form.email,
-        password: form.password,
-      });
-      console.log(data)
-      
+    if (data) {
       setSuccess("Registration successful!");
       setForm({ name: "", email: "", password: "", confirmPassword: "" });
-      console.log("Register success:", data);
-      // Redirect to login page after successful registration
+
+      Swal.fire({
+        icon: "success",
+        title: "Registration Successful",
+        text: "You will be redirected to the login page shortly.",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+
       setTimeout(() => {
         navigate("/login");
       }, 2000);
-    } catch (err: any ) {
-      if (err.response?.data?.message) {
-        setError(err.response.data.message);
-      } else {
-        setError(err.message || "Registration failed");
-      }
-    } finally {
-      setLoading(false);
+
+      // console.log("Register success:", data);
     }
-  };
+  } catch (err: any) {
+    if (err.response?.data?.message) {
+      setError(err.response.data.message);
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed",
+        text: err.response.data.message,
+      });
+    } else {
+      const msg = err.message || "Registration failed";
+      setError(msg);
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed",
+        text: msg,
+      });
+    }
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
-    <div className="bg-gray-100 flex items-center justify-center min-h-screen px-4 w-full">
+    <div className="bg-gray-100 flex items-center justify-center min-h-screen lg:px-4 w-full">
   <div className="bg-white rounded-3xl shadow-xl w-full max-w-md p-8">
     {/* Logo */}
     <div className="flex justify-center mb-6 h-24">
