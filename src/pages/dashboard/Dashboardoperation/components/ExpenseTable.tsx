@@ -28,9 +28,9 @@ const ExpenseTable: React.FC<ExpenseTableProps> = ({
   onDelete,
 }) => {
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto ">
       {/* Desktop Table */}
-      <table className="hidden md:table min-w-full table-fixed bg-white border rounded-lg shadow-md">
+      <table className="hidden md:table min-w-full table-fixed  border rounded-lg shadow-md">
         <thead className="bg-gray-50">
           <tr>
             <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600 w-1/4">
@@ -94,14 +94,14 @@ const ExpenseTable: React.FC<ExpenseTableProps> = ({
       </table>
 
       {/* Mobile Cards */}
-      <div className="md:hidden space-y-4">
+      <div className="md:hidden bg-gray-100 flex flex-col gap-2">
         {expenses.map((exp) => {
           const category =
             categoryStyles[exp.category] || categoryStyles.Others;
           return (
             <div
               key={exp._id}
-              className="bg-white p-4 rounded-xl shadow-md space-y-2"
+              className="bg-white  p-4 rounded-xl shadow-md space-y-2"
             >
               <div className="flex justify-between items-center">
                 <h4 className="text-lg font-semibold text-gray-800">

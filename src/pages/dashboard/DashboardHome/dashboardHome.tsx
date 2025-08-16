@@ -70,7 +70,7 @@ const DashboardHome: React.FC = () => {
   if (loading) return <DashboardSkeleton />;
 
 return (
-  <div className="p-4 sm:p-1 space-y-8">
+  <div className="p-1 lg:p-4 sm:p-1 space-y-8">
     {/* Top stats cards */}
     <TopCards stats={stats} />
 
