@@ -71,13 +71,14 @@ const DashboardOperation: React.FC = () => {
     refetch();
   };
 
-  return (
-    <div className="p-6">
-      <h3 className="text-2xl font-bold mb-6 text-gray-700">
-        Expenses Dashboard
-      </h3>
+return (
+  <div className="p-4 sm:p-6">
+    <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-700 text-center sm:text-left">
+      Expenses Dashboard
+    </h3>
 
-      {/* Filter Bar */}
+    {/* Filter Bar */}
+    <div className="mb-6">
       <FilterBar
         selectedCategory={selectedCategory}
         searchTerm={searchTerm}
@@ -88,35 +89,39 @@ const DashboardOperation: React.FC = () => {
         onStartDateChange={setStartDate}
         onEndDateChange={setEndDate}
       />
+    </div>
 
-      {/* Expense Table */}
+    {/* Expense Table */}
+    <div className="overflow-x-auto bg-white rounded-2xl shadow-md">
       <ExpenseTable
         expenses={filteredExpenses}
         onEdit={openEdit}
         onDelete={setDeleteId}
       />
-
-      {/* Edit Modal */}
-      {editOpen && (
-        <EditExpenseModal
-          form={form}
-          setForm={setForm}
-          categories={categories}
-          onClose={() => setEditOpen(false)}
-          onSave={handleUpdate}
-        />
-      )}
-
-      {/* Delete Confirmation */}
-      {deleteId && (
-        <DeleteConfirmation
-          deleteId={deleteId}
-          onCancel={() => setDeleteId(null)}
-          onConfirm={handleDelete}
-        />
-      )}
     </div>
-  );
+
+    {/* Edit Modal */}
+    {editOpen && (
+      <EditExpenseModal
+        form={form}
+        setForm={setForm}
+        categories={categories}
+        onClose={() => setEditOpen(false)}
+        onSave={handleUpdate}
+      />
+    )}
+
+    {/* Delete Confirmation */}
+    {deleteId && (
+      <DeleteConfirmation
+        deleteId={deleteId}
+        onCancel={() => setDeleteId(null)}
+        onConfirm={handleDelete}
+      />
+    )}
+  </div>
+);
+
 };
 
 export default DashboardOperation;
