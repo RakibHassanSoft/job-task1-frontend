@@ -102,7 +102,7 @@ const ExpensesChart: React.FC<Props> = ({ expenses }) => {
 
   return (
     <div className="w-full flex justify-center px-2 sm:px-0 lg:px-6">
-      <div className="w-full max-w-7xl bg-white p-4 sm:p-6 lg:p-8 rounded-xl shadow-lg flex flex-col gap-6">
+      <div className="w-full max-w-7xl bg-white p-4 sm:p-2 lg:p-8 rounded-xl shadow-lg flex flex-col gap-6">
         
         {/* Filters */}
         <div className="flex flex-col sm:flex-row sm:items-end gap-4 sm:gap-6 flex-wrap 
