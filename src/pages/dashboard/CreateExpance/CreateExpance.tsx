@@ -4,9 +4,10 @@ import { fetchPrivate } from "../../../apiHandler/api";
 
 import ExpenseFormFields from "./components/ExpenseFormFields";
 import DashboardInfo from "./components/DashboardInfo";
-import type { CreateExpenseResponse, ExpenseForm } from "./createExpanceInterface";
-
-
+import type {
+  CreateExpenseResponse,
+  ExpenseForm,
+} from "./createExpanceInterface";
 
 const CreateExpance = () => {
   const [form, setForm] = useState<ExpenseForm>({
@@ -17,8 +18,8 @@ const CreateExpance = () => {
   });
 
   const [loading, setLoading] = useState(false);
-   const [count , setCount] = useState(0);
-   
+  const [count, setCount] = useState(0);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -37,8 +38,8 @@ const CreateExpance = () => {
         "expense/create",
         { method: "POST", data: form }
       );
-      if(response){
-        await setCount(1)
+      if (response) {
+        await setCount(1);
       }
 
       if (response) {
@@ -49,8 +50,6 @@ const CreateExpance = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-
-    
       }
 
       setForm({ title: "", amount: 0, category: "Food", date: "" });
@@ -73,12 +72,11 @@ const CreateExpance = () => {
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Use ExpenseFormFields component */}
-          <ExpenseFormFields  form={form} handleChange={handleChange} />
+          <ExpenseFormFields form={form} handleChange={handleChange} />
 
           <button
-           
             type="submit"
-            className="w-full bg-green-500 text-white py-3 rounded-xl font-semibold text-lg hover:bg-green-600 transition-shadow shadow-md hover:shadow-xl"
+            className="px-6 bg-green-500 text-white py-3 rounded-xl font-semibold text-lg hover:bg-green-600 transition-shadow shadow-md hover:shadow-xl block mx-auto"
             disabled={loading}
           >
             {loading ? "Creating..." : "Create Expense"}
@@ -87,7 +85,7 @@ const CreateExpance = () => {
       </div>
 
       {/* Dashboard */}
-      <DashboardInfo  count={count}/>
+      <DashboardInfo count={count} />
     </div>
   );
 };

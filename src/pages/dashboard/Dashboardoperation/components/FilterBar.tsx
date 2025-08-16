@@ -63,7 +63,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
   };
 
   return (
-    <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-6 items-end justify-center">
+   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
 
       {/* Category Select */}
       <div className="flex-1 min-w-[150px] relative">

@@ -43,7 +43,7 @@ const DashboardInfo: React.FC<DashboardInfoProps> = ({ count }) => {
   return (
     <div
       className="bg-white rounded-2xl shadow-xl border border-gray-200 p-6
-                 h-auto lg:h-[calc(100vh-2rem)] max-h-[calc(100vh-2rem)]
+                 h-auto lg:h-[calc(65vh-2rem)] max-h-[calc(100vh-2rem)]
                  overflow-y-auto hover:shadow-2xl transition flex flex-col"
     >
       <h3 className="text-xl font-semibold text-gray-600 mb-4 text-center">
