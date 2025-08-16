@@ -133,7 +133,7 @@ const Home: React.FC = () => {
         <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8">
           Sign up now and start tracking your expenses instantly.
         </p>
-        <Link to={'/register'} className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-10 rounded-full shadow-lg transition transform hover:scale-105">
+        <Link to="/register" className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-10 rounded-full shadow-lg transition transform hover:scale-105">
           Sign Up Now
         </Link >
       </section>

@@ -92,7 +92,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 
 
   return (
-    <div className="bg-gray-100 flex items-center justify-center min-h-screen px-4 w-full">
+    <div className="bg-gray-100 flex items-center justify-center min-h-screen lg:px-4 w-full">
   <div className="bg-white rounded-3xl shadow-xl w-full max-w-md p-8">
     {/* Logo */}
     <div className="flex justify-center mb-6 h-24">

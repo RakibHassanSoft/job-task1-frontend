@@ -69,17 +69,26 @@ const DashboardHome: React.FC = () => {
 
   if (loading) return <DashboardSkeleton />;
 
-  return (
-    <div className="p-6 space-y-8 ">
-      <TopCards stats={stats} />
+return (
+  <div className="p-4 sm:p-1 space-y-8">
+    {/* Top stats cards */}
+    <TopCards stats={stats} />
 
-      {/* Chart and Table in one row on large screens */}
-      <div className="flex flex-col gap-10 ">
+    {/* Chart and Table responsive layout */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {/* Chart */}
+      <div className="w-full">
         <ExpensesChart expenses={expenses} />
+      </div>
+
+      {/* Table */}
+      <div className="w-full overflow-x-auto">
         <RecentExpensesTable expenses={expenses.slice(0, 10)} />
       </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default DashboardHome;
